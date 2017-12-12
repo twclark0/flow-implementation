@@ -4,31 +4,35 @@ import './App.css';
 class App extends Component {
 
   state = {
-    count: 0
+    count: 0,
+    input: ''
   }
 
   handleAddTodo = () => {
-    this.setState(prevState => ({
-      count: prevState.count + 1
-    }))
-    this.props.addTodo(this.state.count)
-
+    this.props.addTodo(this.state.input)
+    this.setState({ input: '' })
   }
   handleRemoveTodo = (i) => () => {
     this.props.deleteTodo(i)
   }
+  handleInputChange = (e) => {
+    this.setState({ input: e.target.value })
+  }
   render() {
     return (
-      <div>
-        <h1>Todo list</h1>
-        <ul>
+      <div className='todo-container'>
+        <h1>Todo List</h1>
+        <ul className={'todo-ul'}>
           {
             this.props.list.todos.map((t, i) => (
-              <li key={i} onClick={this.handleRemoveTodo(i)}>{t}</li>
+              <li className={'todo-li'} key={i} onClick={this.handleRemoveTodo(i)}>{t}</li>
             ))
           }
         </ul>
-        <button onClick={this.handleAddTodo}>Click Me</button>
+        <div className={'todo-inputContainer'}>
+          <input className={'todo-input'} type="text" onChange={this.handleInputChange} value={this.state.input} />
+          <button className={'todo-button'} onClick={this.handleAddTodo}>Click Me</button>
+        </div>
       </div>
     )
   }
