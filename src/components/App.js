@@ -2,14 +2,7 @@
 
 import React, { Component } from 'react';
 import './App.css';
-
-type Props = {
-  addTodo: (string) => Object,
-  deleteTodo: (number) => Object,
-  list: {
-    todos: Array<string>
-  }
-}
+import type { ComponentsProps } from '../flow-types'
 
 type State = {
   count: number,
@@ -17,7 +10,7 @@ type State = {
 }
 
 
-class App extends Component<Props, State> {
+class App extends Component<ComponentsProps, State> {
 
   state = {
     count: 0,

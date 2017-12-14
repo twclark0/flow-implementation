@@ -1,26 +1,30 @@
+// @flow
+
 import { combineReducers } from 'redux'
 
-const initialState = {
+import type { AddTodo, RemoveTodo, StoreState, ReducerState, TodosAction } from '../flow-types'
+
+const initialState: ReducerState = {
     todos: []
 }
 
-const handleAddTodo = (state, action) => (
+const handleAddTodo = (state: ReducerState, action: AddTodo): ReducerState => (
     {
         todos: [...state.todos, action.data]
     }
 )
 
-const handleRemoveTodo = (state, action) => (
+const handleRemoveTodo = (state: ReducerState, action: RemoveTodo): ReducerState => (
     {
         todos: [
-            ...state.todos.slice(0, action.data),
-            ...state.todos.slice(action.data + 1)
+            ...state.todos.slice(0, action.id),
+            ...state.todos.slice(action.id + 1)
         ]
     }
 )
 
 
-const list = (state = initialState, action) => {
+const list = (state = initialState, action): ReducerState => {
     const handlers = {
         'ADDTODO': handleAddTodo,
         'REMOVETODO': handleRemoveTodo
@@ -30,7 +34,7 @@ const list = (state = initialState, action) => {
         : state
 }
 
-const rootReducer = combineReducers({
+const rootReducer: StoreState = combineReducers({
   list
 })
 
