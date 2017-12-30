@@ -5,7 +5,7 @@ import './App.css';
 
 type Input = string
 
-type Id = number
+type Index = number
 
 type State = {
   input: Input,
@@ -30,7 +30,7 @@ class App extends Component<Props, State> {
         todos: [...prevState.todos, prevState.input]
     }))
   }
-  handleRemoveTodo = (i: number) => () => {
+  handleRemoveTodo = (i: Index) => () => {
     this.setState(prevstate => ({
         todos: [
             ...prevstate.todos.slice(0, i),

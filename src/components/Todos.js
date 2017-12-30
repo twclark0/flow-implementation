@@ -1,7 +1,22 @@
+// @flow
+
 import React, { Component } from 'react';
 import './App.css';
 
-class App extends Component {
+type Index = number
+
+type Input = string
+
+type State = {
+  input: Input,
+  todos: Array<Input>
+}
+
+type Props = {
+  title: string
+}
+
+class App extends Component<Props, State> {
 
   state = {
     input: '',
@@ -14,7 +29,7 @@ class App extends Component {
         todos: [...prevState.todos, prevState.input]
     }))
   }
-  handleRemoveTodo = (i) => () => {
+  handleRemoveTodo = (i: Index) => () => {
     this.setState(prevstate => ({
         todos: [
             ...prevstate.todos.slice(0, i),
@@ -22,7 +37,7 @@ class App extends Component {
         ]
     }))
   }
-  handleInputChange = (e) => {
+  handleInputChange = (e: SyntheticKeyboardEvent<HTMLInputElement>) => {
     this.setState({ input: e.currentTarget.value })
   }
   render() {
